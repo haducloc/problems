@@ -51,7 +51,7 @@ public class PreTagUtils {
 		final int itemsPerLine = 5;
 
 		for (int i = 0; i < tags.length; i++) {
-			sb.append(tags[i]).append(",");
+			sb.append(tags[i]).append(", ");
 
 			if ((i > 0) && (i % (itemsPerLine - 1) == 0)) {
 				sb.appendln();
