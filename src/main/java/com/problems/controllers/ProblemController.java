@@ -13,6 +13,7 @@ import com.appslandia.common.utils.ValueUtils;
 import com.appslandia.plum.base.ActionResult;
 import com.appslandia.plum.base.Authorize;
 import com.appslandia.plum.base.Controller;
+import com.appslandia.plum.base.EnableEtag;
 import com.appslandia.plum.base.ExceptionHandler;
 import com.appslandia.plum.base.Home;
 import com.appslandia.plum.base.HttpGet;
@@ -74,6 +75,7 @@ public class ProblemController {
 	}
 
 	@HttpGet
+	@EnableEtag
 	public ActionResult index(RequestAccessor request, HttpServletResponse response, @Model ProblemSearchModel model) throws Exception {
 		model.setPageIndex(ValueUtils.valueOrMin(model.getPageIndex(), 1));
 		model.setViewType(ViewTypes.toViewType(model.getViewType()));
@@ -166,6 +168,7 @@ public class ProblemController {
 	}
 
 	@HttpGet
+	@EnableEtag
 	public ActionResult view(RequestAccessor request, HttpServletResponse response, Integer problemId) throws Exception {
 		Problem model = this.problemService.findByPk(problemId);
 		request.storeModel(model);
@@ -173,6 +176,7 @@ public class ProblemController {
 	}
 
 	@HttpGet
+	@EnableEtag
 	public ActionResult mytags(RequestAccessor request, HttpServletResponse response, @Model MyTagsModel model) throws Exception {
 		List<String> tags = this.problemService.getProblemTags(request.getUserId());
 		model.setMytags(tags);
