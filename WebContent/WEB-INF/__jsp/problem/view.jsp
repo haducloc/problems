@@ -45,18 +45,18 @@
 
           <div class="form-group">
             <t:fieldLabel field="descText" labelKey="problem.descText" clazz="font-w6" />
-            <pre class="p-3 mb-0 problem-box border">${fx:escCt(model.descText)}</pre>
+            <pre class="m-0 p-1 problem-box border">${fx:escCt(model.descText)}</pre>
           </div>
 
           <div class="form-group mb-0">
             <t:fieldLabel field="solutions" labelKey="problem.solutions" clazz="font-w6" />
-            <pre class="p-3 mb-0 problem-box border">${fx:escCt(model.solutions)}</pre>
+            <pre class="m-0 p-1 problem-box border">${fx:escCt(model.solutions)}</pre>
           </div>
 
           <t:c t="div" clazz="form-group" render="${not empty model.impls}">
             <t:fieldLabel field="impls" labelKey="problem.impls" clazz="font-w6" />
 
-            <pre class="p-3 mb-0 border"><code class="language-java">${fx:escCt(model.impls)}</code></pre>
+            <pre class="m-0 p-1 border"><code class="language-java">${fx:escCt(model.impls)}</code></pre>
           </t:c>
         </form>
 

@@ -127,12 +127,12 @@
 
             <div class="form-group">
               <t:fieldLabel field="descText" labelKey="problem.descText" clazz="font-w6" />
-              <pre class="p-3 mb-0 problem-box border">${fx:escCt(item.descText)}</pre>
+              <pre class="m-0 p-1 problem-box border">${fx:escCt(item.descText)}</pre>
             </div>
 
             <div class="form-group mb-0">
               <t:fieldLabel field="solutions" labelKey="problem.solutions" clazz="font-w6" />
-              <pre class="p-3 mb-0 problem-box border">${fx:escCt(item.solutions)}</pre>
+              <pre class="m-0 p-1 problem-box border">${fx:escCt(item.solutions)}</pre>
             </div>
 
           </form>
