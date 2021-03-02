@@ -109,14 +109,14 @@
 
             <div class="form-group">
               <t:fieldLabel field="problemUrl" labelKey="problem.titleText" clazz="font-w6" />
-              <p class="px-3 py-1 mb-0 problem-box font-sl1 font-w6">
+              <p class="m-0 p-1 problem-box font-sl1 font-w6">
                 <t:actionLink action="view" __problemId="${item.problemId}" target="_blank">${fx:escCt(item.titleText)}</t:actionLink>
               </p>
             </div>
 
             <div class="form-group">
               <t:fieldLabel field="tags" labelKey="problem.tags" clazz="font-w6" />
-              <p class="px-3 py-1 mb-0 problem-box">
+              <p class="m-0 p-1 problem-box">
                 <t:iterate items="${item.tagList}" var="tag">
                   <t:actionLink action="index" __viewType="${model.viewType}" __query="${tag}" clazz="tag-link mr-3">
                        ${fx:escCt(tag)}
