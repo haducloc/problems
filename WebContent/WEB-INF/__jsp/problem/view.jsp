@@ -54,9 +54,7 @@
         <t:c t="div" clazz="form-group" render="${not empty model.impls}">
           <t:fieldLabel field="impls" labelKey="problem.impls" clazz="font-w6" />
 
-          <pre class="m-0 p-1 border">
-              <code class="language-java">${fx:escCt(model.impls)}</code>
-            </pre>
+          <pre class="m-0 p-1 border font-sm1"><code class="language-java">${fx:escCt(model.impls)}</code></pre>
         </t:c>
       </form>
 
