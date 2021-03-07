@@ -21,6 +21,8 @@ public class ProblemSearchModel {
 
 	private Integer pageIndex;
 
+	private Integer pageSize;
+
 	@NotBind
 	private Out<Integer> recordCount = new Out<>();
 
@@ -59,6 +61,14 @@ public class ProblemSearchModel {
 
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public Out<Integer> getRecordCount() {

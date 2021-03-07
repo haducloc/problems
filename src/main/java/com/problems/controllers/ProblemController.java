@@ -44,7 +44,6 @@ import com.problems.utils.ViewTypes;
 @Home
 public class ProblemController {
 
-	static final int PAGE_SIZE = 25;
 	public static final String ALG_TAG_LIST = "algTagList";
 
 	@Inject
@@ -78,15 +77,17 @@ public class ProblemController {
 	@EnableEtag
 	public ActionResult index(RequestAccessor request, HttpServletResponse response, @Model ProblemSearchModel model) throws Exception {
 		model.setPageIndex(ValueUtils.valueOrMin(model.getPageIndex(), 1));
+		model.setPageSize(ValueUtils.valueOrMin(model.getPageSize(), 25));
 		model.setViewType(ViewTypes.toViewType(model.getViewType()));
 
 		request.getModelState().clearErrors();
 
 		// Problems
-		List<Problem> list = this.problemService.query(request.getUserId(), model.getQuery(), model.getPageIndex(), PAGE_SIZE, model.getRecordCount());
+		List<Problem> list = this.problemService.query(request.getUserId(), model.getQuery(), model.getPageIndex(), model.getPageSize(),
+				model.getRecordCount());
 		model.setProblems(list);
 
-		model.setPagerModel(new PagerModel(model.getPageIndex(), model.getRecordCount().val(), PAGE_SIZE));
+		model.setPagerModel(new PagerModel(model.getPageIndex(), model.getRecordCount().val(), model.getPageSize()));
 
 		// Active Tags
 		if (!list.isEmpty() && model.isQueryTag()) {

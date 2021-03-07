@@ -12,7 +12,7 @@
 
       <div class="mb-4 p-4 border">
 
-        <t:form action="index" method="GET">
+        <t:form action="index" method="GET" __pageSize="${model.pageSize}">
           <div class="input-group">
             <div class="input-group-prepend">
               <t:select items="${model.viewTypes}" path="model.viewType" clazz="form-control rounded-0 px-2" triggerSubmit="true" />
@@ -46,7 +46,7 @@
           <t:tpl type="page">
             <li class="page-item${selected ? ' active' : ''}">
               <t:actionLink clazz="page-link" action="index" __viewType="${model.viewType}" __query="${model.query}" __pageIndex="${item.index}"
-                __recordCount="${model.pagerModel.recordCount}">${label}</t:actionLink>
+                __recordCount="${model.pagerModel.recordCount}" __pageSize="${model.pageSize}">${label}</t:actionLink>
             </li>
           </t:tpl>
           <t:tpl type="dots">
@@ -150,7 +150,7 @@
           <t:tpl type="page">
             <li class="page-item${selected ? ' active' : ''}">
               <t:actionLink clazz="page-link" action="index" __viewType="${model.viewType}" __query="${model.query}" __pageIndex="${item.index}"
-                __recordCount="${model.pagerModel.recordCount}">${label}</t:actionLink>
+                __recordCount="${model.pagerModel.recordCount}" __pageSize="${model.pageSize}">${label}</t:actionLink>
             </li>
           </t:tpl>
           <t:tpl type="dots">
