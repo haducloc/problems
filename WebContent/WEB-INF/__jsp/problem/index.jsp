@@ -12,7 +12,9 @@
 
       <div class="mb-4 p-4 border">
 
-        <t:form action="index" method="GET" __pageSize="${model.pageSize}">
+        <t:form action="index" method="GET">
+          <t:hidden path="model.pageSize" />
+
           <div class="input-group">
             <div class="input-group-prepend">
               <t:select items="${model.viewTypes}" path="model.viewType" clazz="form-control rounded-0 px-2" triggerSubmit="true" />
