@@ -8,7 +8,7 @@ package com.problems.utils;
 public class DBUtils {
 
 	public static final String DB_NAME = "ProblemDB";
-	public static final String DS_NAME = "java:app/jdbc/Problems";
+	public static final String DS_NAME = "java:/jdbc/Problems";
 
 	public static final String PU_NAME = "Problems";
 }
