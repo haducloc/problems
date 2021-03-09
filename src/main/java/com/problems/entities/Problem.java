@@ -15,8 +15,10 @@ import javax.validation.constraints.NotNull;
 import com.appslandia.common.base.Bind;
 import com.appslandia.common.formatters.Formatter;
 import com.appslandia.common.jpa.EntityBase;
+import com.appslandia.common.utils.NormalizeUtils;
 import com.appslandia.common.utils.StringUtils;
 import com.appslandia.common.utils.TagUtils;
+import com.appslandia.common.validators.PathComponent;
 import com.problems.formatters.Formatters;
 
 /**
@@ -28,6 +30,7 @@ import com.problems.formatters.Formatters;
 @NamedQuery(name = "Problem.queryCount", query = "SELECT COUNT(e) FROM Problem e WHERE (e.accountId=:accountId) AND ((:query IS NULL) OR (:query LIKE '#%' AND e.tags LIKE :wtag) OR (e.titleText LIKE :titleText))")
 @NamedQuery(name = "Problem.query", query = "SELECT e FROM Problem e WHERE (e.accountId=:accountId) AND ((:query IS NULL) OR (:query LIKE '#%' AND e.tags LIKE :wtag) OR (e.titleText LIKE :titleText)) ORDER BY e.timeCreated DESC")
 @NamedQuery(name = "Problem.queryDbTags", query = "SELECT e.tags FROM Problem e WHERE e.accountId=:accountId")
+@NamedQuery(name = "Problem.checkTitlePath", query = "SELECT 1 FROM Problem e WHERE e.title_path=:title_path")
 public class Problem extends EntityBase {
 	private static final long serialVersionUID = 1L;
 
@@ -66,6 +69,11 @@ public class Problem extends EntityBase {
 	@Column(updatable = false)
 	private Integer accountId;
 
+	@NotNull
+	@PathComponent
+	@Column(unique = true)
+	private String title_path;
+
 	@Override
 	public Serializable getPk() {
 		return this.problemId;
@@ -89,6 +97,7 @@ public class Problem extends EntityBase {
 
 	public void setTitleText(String titleText) {
 		this.titleText = StringUtils.firstUpperCase(titleText, Locale.ROOT);
+		this.title_path = NormalizeUtils.unaccent(NormalizeUtils.normalizeLabel(titleText));
 	}
 
 	public String getProblemUrl() {
@@ -145,5 +154,13 @@ public class Problem extends EntityBase {
 
 	public void setAccountId(Integer accountId) {
 		this.accountId = accountId;
+	}
+
+	public String getTitle_path() {
+		return title_path;
+	}
+
+	public void setTitle_path(String title_path) {
+		this.title_path = title_path;
 	}
 }

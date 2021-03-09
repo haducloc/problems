@@ -102,4 +102,8 @@ public class ProblemService {
 		Collections.sort(sortedTags, (t1, t2) -> Integer.compare(preTags.getIndex(t1, 1000), preTags.getIndex(t2, 2000)));
 		return Collections.unmodifiableList(sortedTags);
 	}
+
+	public boolean hasTitlePath(String titlePath) {
+		return em.createNamedQuery("Problem.checkTitlePath").setParameter("title_path", titlePath).getFirstOrNull() != null;
+	}
 }

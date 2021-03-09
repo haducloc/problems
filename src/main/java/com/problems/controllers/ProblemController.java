@@ -22,6 +22,7 @@ import com.appslandia.plum.base.Model;
 import com.appslandia.plum.base.ModelBinder;
 import com.appslandia.plum.base.PagerModel;
 import com.appslandia.plum.base.RequestAccessor;
+import com.appslandia.plum.base.Resources;
 import com.appslandia.plum.base.TagCookieHandler;
 import com.appslandia.plum.results.JspResult;
 import com.appslandia.plum.results.RedirectResult;
@@ -128,6 +129,16 @@ public class ProblemController {
 
 		request.getModelState().remove("accountId", "timeCreated");
 		model.setAccountId(request.getUserId());
+
+		if (request.getModelState().isValid("titleText") && !request.getModelState().isValid("title_path")) {
+			request.getModelState().addError("titleText", request.res(Resources.ERROR_FIELD_INVALID, request.res("problem.titleText")));
+		}
+
+		if (request.getModelState().isValid("title_path")) {
+			if (this.problemService.hasTitlePath(model.getTitle_path())) {
+				request.getModelState().addError("titleText", request.res("problem_edit.title_text_existed"));
+			}
+		}
 
 		if (!request.getModelState().isValid()) {
 			request.storeModel(model);
