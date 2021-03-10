@@ -14,23 +14,25 @@ import com.appslandia.plum.base.Resources;
  */
 public class ViewTypes {
 
-	public static final int LIST_VIEW = 1;
-	public static final int DETAIL_VIEW = 2;
+	public static final int DEFAULT_VIEW = 1;
+	public static final int SOLUTIONS_VIEW = 2;
+	public static final int IMPLS_VIEW = 3;
 
 	public static List<SelectItem> createList(Resources resources) {
 		List<SelectItem> list = new ArrayList<>();
 
-		list.add(new SelectItemImpl(LIST_VIEW, resources.getOrDefault("viewTypes.list_view", "List View")));
-		list.add(new SelectItemImpl(DETAIL_VIEW, resources.getOrDefault("viewTypes.detail_view", "Detail View")));
+		list.add(new SelectItemImpl(DEFAULT_VIEW, resources.getOrDefault("viewTypes.default_view", "Default")));
+		list.add(new SelectItemImpl(SOLUTIONS_VIEW, resources.getOrDefault("viewTypes.solutions_view", "Solutions")));
+		list.add(new SelectItemImpl(IMPLS_VIEW, resources.getOrDefault("viewTypes.impls_view", "Implementations")));
 		return list;
 	}
 
 	public static int toViewType(Integer value) {
 		if (value != null) {
-			if (value == LIST_VIEW || value == DETAIL_VIEW) {
+			if (value == DEFAULT_VIEW || value == SOLUTIONS_VIEW || value == IMPLS_VIEW) {
 				return value;
 			}
 		}
-		return LIST_VIEW;
+		return DEFAULT_VIEW;
 	}
 }

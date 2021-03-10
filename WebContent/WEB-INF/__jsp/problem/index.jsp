@@ -5,6 +5,10 @@
   __layout=layout_admin
  -->
 
+<!-- @cssSection begin -->
+<link href="@(contextPathExpr)/static/prism/prism.css" rel="stylesheet" />
+<!-- @cssSection end -->
+
 <div class="container-fluid mb-4">
 
   <div class="row justify-content-center">
@@ -102,45 +106,50 @@
     </div>
   </t:c>
 
-  <t:c t="div" clazz="row" render="${model.viewType eq 2}">
+  <t:c t="div" clazz="row" render="${model.viewType ne 1}">
     <div class="col">
       <t:iterate items="${model.problems}" var="item">
+        <form>
 
-        <div class="mb-4 p-3 shadow-sm">
-          <form>
+          <div class="form-group">
+            <t:fieldLabel field="problemUrl" labelKey="problem.titleText" clazz="font-w6" />
+            <p class="m-0 p-1 problem-box font-sl1 font-w6">
+              <t:actionLink action="view" __problemId="${item.problemId}" target="_blank">${fx:escCt(item.titleText)}</t:actionLink>
+            </p>
+          </div>
 
-            <div class="form-group">
-              <t:fieldLabel field="problemUrl" labelKey="problem.titleText" clazz="font-w6" />
-              <p class="m-0 p-1 problem-box font-sl1 font-w6">
-                <t:actionLink action="view" __problemId="${item.problemId}" target="_blank">${fx:escCt(item.titleText)}</t:actionLink>
-              </p>
-            </div>
-
-            <div class="form-group">
-              <t:fieldLabel field="tags" labelKey="problem.tags" clazz="font-w6" />
-              <p class="m-0 p-1 problem-box">
-                <t:iterate items="${item.tagList}" var="tag">
-                  <t:actionLink action="index" __viewType="${model.viewType}" __query="${tag}" clazz="tag-link mr-3">
+          <div class="form-group">
+            <t:fieldLabel field="tags" labelKey="problem.tags" clazz="font-w6" />
+            <p class="m-0 p-1 problem-box">
+              <t:iterate items="${item.tagList}" var="tag">
+                <t:actionLink action="index" __viewType="${model.viewType}" __query="${tag}" clazz="tag-link mr-3">
                        ${fx:escCt(tag)}
                     </t:actionLink>
-                </t:iterate>
-              </p>
-            </div>
+              </t:iterate>
+            </p>
+          </div>
 
-            <div class="form-group">
-              <t:fieldLabel field="descText" labelKey="problem.descText" clazz="font-w6" />
-              <pre class="m-0 p-1 problem-box border">${fx:escCt(item.descText)}</pre>
-            </div>
+          <div class="form-group">
+            <t:fieldLabel field="descText" labelKey="problem.descText" clazz="font-w6" />
+            <pre class="m-0 p-1 problem-box border">${fx:escCt(item.descText)}</pre>
+          </div>
 
-            <div class="form-group mb-0">
-              <t:fieldLabel field="solutions" labelKey="problem.solutions" clazz="font-w6" />
-              <pre class="m-0 p-1 problem-box border">${fx:escCt(item.solutions)}</pre>
-            </div>
+          <div class="form-group mb-0">
+            <t:fieldLabel field="solutions" labelKey="problem.solutions" clazz="font-w6" />
+            <pre class="m-0 p-1 problem-box border">${fx:escCt(item.solutions)}</pre>
+          </div>
 
-          </form>
-        </div>
+          <t:c t="div" clazz="form-group" render="${model.viewType eq 3 and not empty item.impls}">
+            <t:fieldLabel field="impls" labelKey="problem.impls" clazz="font-w6" />
 
+            <pre class="m-0 p-1 border font-sm1">
+                <code class="language-java">${fx:escCt(item.impls)}</code>
+              </pre>
+          </t:c>
+
+        </form>
       </t:iterate>
+
     </div>
   </t:c>
 
@@ -169,6 +178,8 @@
 <%@ include file="../includes/mytags_dialog.jsp"%>
 
 <!-- @jsSection begin -->
+<script src="@(contextPathExpr)/static/prism/prism.js"></script>
+
 <script type="text/javascript">
   $(document).ready(function() {
 
