@@ -103,8 +103,8 @@ public class ProblemService {
 		return Collections.unmodifiableList(sortedTags);
 	}
 
-	public boolean hasTitlePath(String titlePath, Integer problemId) {
-		return em.createNamedQuery("Problem.checkTitlePath").setParameter("problemId", problemId).setParameter("title_path", titlePath)
-				.getFirstOrNull() != null;
+	public boolean hasTitlePath(int accountId, String titlePath, Integer problemId) {
+		return em.createNamedQuery("Problem.checkTitlePath").setParameter("accountId", accountId).setParameter("problemId", problemId)
+				.setParameter("title_path", titlePath).getFirstOrNull() != null;
 	}
 }

@@ -31,7 +31,7 @@ import com.problems.utils.ProblemUtils;
 @NamedQuery(name = "Problem.queryCount", query = "SELECT COUNT(e) FROM Problem e WHERE (e.accountId=:accountId) AND ((:query IS NULL) OR (:query LIKE '#%' AND e.tags LIKE :wtag) OR (e.titleText LIKE :titleText))")
 @NamedQuery(name = "Problem.query", query = "SELECT e FROM Problem e WHERE (e.accountId=:accountId) AND ((:query IS NULL) OR (:query LIKE '#%' AND e.tags LIKE :wtag) OR (e.titleText LIKE :titleText)) ORDER BY e.timeCreated DESC")
 @NamedQuery(name = "Problem.queryDbTags", query = "SELECT e.tags FROM Problem e WHERE e.accountId=:accountId")
-@NamedQuery(name = "Problem.checkTitlePath", query = "SELECT 1 FROM Problem e WHERE (:problemId IS NULL OR e.problemId != :problemId) AND e.title_path=:title_path")
+@NamedQuery(name = "Problem.checkTitlePath", query = "SELECT 1 FROM Problem e WHERE e.accountId=:accountId AND (:problemId IS NULL OR e.problemId != :problemId) AND e.title_path=:title_path")
 public class Problem extends EntityBase {
 	private static final long serialVersionUID = 1L;
 
@@ -72,7 +72,6 @@ public class Problem extends EntityBase {
 
 	@NotNull
 	@PathComponent
-	@Column(unique = true)
 	private String title_path;
 
 	@Column(length = 50)

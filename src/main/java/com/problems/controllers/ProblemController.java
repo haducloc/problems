@@ -135,7 +135,7 @@ public class ProblemController {
 		}
 
 		if (request.getModelState().isValid("title_path")) {
-			if (this.problemService.hasTitlePath(model.getTitle_path(), model.getProblemId())) {
+			if (this.problemService.hasTitlePath(request.getUserId(), model.getTitle_path(), model.getProblemId())) {
 				request.getModelState().addError("titleText", request.res("problem_edit.title_text_existed"));
 			}
 		}
