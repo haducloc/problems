@@ -109,7 +109,7 @@
   <t:c t="div" clazz="row" render="${model.viewType ne 1}">
     <div class="col">
       <t:iterate items="${model.problems}" var="item">
-        <form>
+        <form class="mb-4">
 
           <div class="form-group">
             <t:fieldLabel field="problemUrl" labelKey="problem.titleText" clazz="font-w6" />
