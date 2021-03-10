@@ -142,9 +142,7 @@
           <t:c t="div" clazz="form-group" render="${model.viewType eq 3 and not empty item.impls}">
             <t:fieldLabel field="impls" labelKey="problem.impls" clazz="font-w6" />
 
-            <pre class="m-0 p-1 border font-sm1">
-                <code class="language-java">${fx:escCt(item.impls)}</code>
-              </pre>
+            <pre class="m-0 p-1 border font-sm1"><code class="language-${item.language}">${fx:escCt(item.impls)}</code></pre>
           </t:c>
 
         </form>

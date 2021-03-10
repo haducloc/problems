@@ -20,6 +20,7 @@ import com.appslandia.common.utils.StringUtils;
 import com.appslandia.common.utils.TagUtils;
 import com.appslandia.common.validators.PathComponent;
 import com.problems.formatters.Formatters;
+import com.problems.utils.ProblemUtils;
 
 /**
  *
@@ -73,6 +74,9 @@ public class Problem extends EntityBase {
 	@PathComponent
 	@Column(unique = true)
 	private String title_path;
+
+	@Column(length = 50)
+	private String language;
 
 	@Override
 	public Serializable getPk() {
@@ -138,6 +142,7 @@ public class Problem extends EntityBase {
 
 	public void setImpls(String impls) {
 		this.impls = impls;
+		this.language = ProblemUtils.parseLanguage(impls);
 	}
 
 	public OffsetDateTime getTimeCreated() {
@@ -162,5 +167,15 @@ public class Problem extends EntityBase {
 
 	public void setTitle_path(String title_path) {
 		this.title_path = title_path;
+	}
+
+	public String getLanguage() {
+		if (language != null)
+			return language;
+		return ProblemUtils.DEFAULT_LANGUAGE;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 }
